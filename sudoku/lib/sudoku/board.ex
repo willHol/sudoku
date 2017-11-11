@@ -14,17 +14,6 @@ defmodule Sudoku.Board do
   def valid_num?(nil), do: true
   def valid_num?(_), do: false
 
-  @doc """
-  Checks if a board is the correct shape. Returns a boolean
-
-  ## Examples
-
-    iex> board_valid?([[1,2,3,4,5,6,7,8,9]
-                       [1,2,3,4,5,6,7,8,9],
-                       [1,2,3,4,5,6,7,8,9]])
-    true
-
-  """
   def valid?(board) do
     num_columns = num_columns(board)
     num_rows = num_rows(Enum.at(board, 0))
@@ -45,19 +34,6 @@ defmodule Sudoku.Board do
     lines_correct?(board) && boxes_correct?(board)
   end
 
-  @doc """
-  Checks if column/row sums to 45 with numbers between 1-9, no repeats. Returns
-  a boolean.
-
-  ## Examples
-
-      iex> line_valid?([1,2,3,4,5,6,7,8,9])
-      true
-
-      iex> line_valid?([1,2,3,4,4,5,6,7,8])
-      false
-
-  """
   def line_correct?(line) do
     {valid?, _} =
       Enum.reduce(line, {true, []}, fn el, acc ->
@@ -108,16 +84,10 @@ defmodule Sudoku.Board do
     end)
   end
 
-  @doc """
-  Extracts the ith row of the `board` into a list.
-  """
   def ith_row(board, i) do
     Enum.at(board, i)
   end
 
-  @doc """
-  Extracts the ith column of the `board` into a list.
-  """
   def ith_column(board, i) do
     board
     |> Enum.reduce([], &([Enum.at(&1, i) | &2]))
@@ -179,9 +149,7 @@ defmodule Sudoku.Board do
     end
   end
 
-  @doc """
-  `[x, y]` represents the bottom right corner of the square.
-  """
+  # [x, y] represents the bottom right corner of the square.
   def next_box(board, [x, y]) do
     next_elem(board, [x, y], @square_dim)
   end
