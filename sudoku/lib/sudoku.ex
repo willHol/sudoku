@@ -3,6 +3,8 @@ defmodule Sudoku do
   
   """
 
+  alias Sudoku.Board
+
   def solve_brute(board, [x, y] \\ [-1, 0]) do
     if Board.full?(board) do
       if Board.correct?(board) do
